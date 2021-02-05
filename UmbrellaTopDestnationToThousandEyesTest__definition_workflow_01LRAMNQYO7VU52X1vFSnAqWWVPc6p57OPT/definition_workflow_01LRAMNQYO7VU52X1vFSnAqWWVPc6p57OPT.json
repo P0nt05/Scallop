@@ -1,0 +1,639 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01LRAMNQYO7VU52X1vFSnAqWWVPc6p57OPT",
+    "name": "Umrella Top Destination to ThousandEyes",
+    "title": "Umrella Top Destination to ThousandEyes",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "access_token",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01LRANQPEG7GO6e1npm27eWIvtBEMTwn39F",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Umrella Top Destination to ThousandEyes",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01LRA3UOH378B5l7Gen784yaAMnLeAc1rKO",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01LRAMPDS0R160r67fpqXQCLF1dtqcTcJyQ",
+        "name": "Umbrella Get Token",
+        "title": "Umbrella Get Token",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Umbrella Get Token",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01LRAJ2SGON1B7lgaPTWYqGbjXzTHM571I0",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01LR9ZI6TXDMM3YHhi6majjQZIMTkMEdVSc"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01LRANJDIINXX6K8n2Qvve18mQGvxSQBdd8",
+        "name": "Set Variables",
+        "title": "set Bearer Token",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "set Bearer Token",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01LRAMNQYO7VU52X1vFSnAqWWVPc6p57OPT.local.variable_workflow_01LRANQPEG7GO6e1npm27eWIvtBEMTwn39F$",
+              "variable_value_new": "$activity.definition_activity_01LRAMPDS0R160r67fpqXQCLF1dtqcTcJyQ.output.variable_workflow_01LRAM9TO74C27D0m20poxXhnFMiVWPwTWs$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01LRAN6R7AFEI63xBCrTN39wxpWkqpzHi4L",
+        "name": "HTTP Request",
+        "title": "Umbrella Get Top Destinations",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01LRAMNQYO7VU52X1vFSnAqWWVPc6p57OPT.local.variable_workflow_01LRANQPEG7GO6e1npm27eWIvtBEMTwn39F$"
+            }
+          ],
+          "display_name": "Umbrella Get Top Destinations",
+          "method": "GET",
+          "relative_url": "/v2/organizations/$global.variable_01LRA4V4KVGIO3P86YLh7OkwnKDYGJLZKin.global.variable_01LRA4V4KVGIO3P86YLh7OkwnKDYGJLZKin$/top-destinations/dns?from=-1days\u0026to=now\u0026limit=20\u0026offset=0\u0026categories=32",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01M3V6AXFUE253wKaLshn2vyrLiHvlTnQ2m",
+        "name": "HTTP Request",
+        "title": "Umbrella Get Top Categories",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01LRAMNQYO7VU52X1vFSnAqWWVPc6p57OPT.local.variable_workflow_01LRANQPEG7GO6e1npm27eWIvtBEMTwn39F$"
+            }
+          ],
+          "display_name": "Umbrella Get Top Categories",
+          "method": "GET",
+          "relative_url": "/v2/organizations/$global.variable_01LRA4V4KVGIO3P86YLh7OkwnKDYGJLZKin.global.variable_01LRA4V4KVGIO3P86YLh7OkwnKDYGJLZKin$/top-categories/dns?from=-1days\u0026to=now\u0026limit=10\u0026offset=0",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": true,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01M31THKII6OE3f5FQItcLGP79kmTSCPK4b",
+        "name": "JSONPath Query",
+        "title": "query Top Domains",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "query Top Domains",
+          "input_json": "$activity.definition_activity_01LRAN6R7AFEI63xBCrTN39wxpWkqpzHi4L.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$..domain",
+              "jsonpath_query_name": "Domain",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01M3SQS6PYSN10pUOanh3ZFRXHsScfBn3Be",
+        "name": "Execute Python Script",
+        "title": "sanitize and convert List",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "sanitize and convert List",
+          "script": "list_Domains = $activity.definition_activity_01M31THKII6OE3f5FQItcLGP79kmTSCPK4b.output.jsonpath_queries.Domain$\nstring_Domains = str(list_Domains).strip('[]')\nsanitized_Domains = string_Domains.replace(\",\", \";\\r\\n\")\nformat_Domains = sanitized_Domains.replace(\" \", \"\")\nresult = format_Domains.replace(\"'\",\"\")",
+          "script_queries": [
+            {
+              "script_query": "result",
+              "script_query_name": "TopDomains",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01M3RS5LFTV252LaDE36vOSKjOOtn5EyG1m",
+        "name": "Read Table from Text",
+        "title": "Top Domain Table",
+        "type": "core.read_table_from_text",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "delimiters": [
+            {
+              "delimiter": ";"
+            }
+          ],
+          "display_name": "Top Domain Table",
+          "input_text": "$activity.definition_activity_01M3SQS6PYSN10pUOanh3ZFRXHsScfBn3Be.output.script_queries.TopDomains$",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "Domain",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01LYMBVPPZP1E59oOpyahRRTmuyzhdxmFye",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01M3RS5LFTV252LaDE36vOSKjOOtn5EyG1m.output.read_table_from_text$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01M3UZ7D83DUY5v29t1apiX6yTSsXFI15zg",
+            "name": "ThousandEyes - Create Test",
+            "title": "ThousandEyes - Create Test",
+            "type": "workflow.sub_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": true,
+              "display_name": "ThousandEyes - Create Test",
+              "input": {
+                "variable_workflow_01M3U0D1T4JOE44aV8a0LsMD4dF1HNYd899": "$activity.definition_activity_01LYMBVPPZP1E59oOpyahRRTmuyzhdxmFye.input.source_array[@].Domain$"
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "execute_on_this_target": true,
+                "target_id": "definition_target_01M3TZLZKKICV0iEyxfqVyFDR6ZfqpPTs0V",
+                "target_type": "web-service.endpoint"
+              },
+              "workflow_id": "definition_workflow_01M3TXZFN47LJ36IpRFte4JHAXZUMQhEeRw"
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01LRA3UOH378B5l7Gen784yaAMnLeAc1rKO": {
+      "unique_name": "definition_target_01LRA3UOH378B5l7Gen784yaAMnLeAc1rKO",
+      "name": "Umbrella Reporting API",
+      "title": "Umbrella Reporting API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "Umbrella Reporting API",
+        "host": "reports.api.umbrella.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01LRAJ2SGON1B7lgaPTWYqGbjXzTHM571I0": {
+      "unique_name": "definition_target_01LRAJ2SGON1B7lgaPTWYqGbjXzTHM571I0",
+      "name": "Umbrella Management API",
+      "title": "Umbrella Management API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01LRAHD6ML5N74zPt0XZjKqn2OJbB6xwaSh",
+        "disable_certificate_validation": false,
+        "display_name": "Umbrella Management API",
+        "host": "management.api.umbrella.com",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01M3TZLZKKICV0iEyxfqVyFDR6ZfqpPTs0V": {
+      "unique_name": "definition_target_01M3TZLZKKICV0iEyxfqVyFDR6ZfqpPTs0V",
+      "name": "ThousandEyes",
+      "title": "ThousandEyes",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "ThousandEyes",
+        "host": "api.thousandeyes.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01LRAHD6ML5N74zPt0XZjKqn2OJbB6xwaSh": {
+      "unique_name": "definition_runtime_user_01LRAHD6ML5N74zPt0XZjKqn2OJbB6xwaSh",
+      "name": "Umbrella",
+      "title": "Umbrella",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "Umbrella"
+      }
+    }
+  },
+  "variables": {
+    "variable_01LRA4V4KVGIO3P86YLh7OkwnKDYGJLZKin": {
+      "unique_name": "variable_01LRA4V4KVGIO3P86YLh7OkwnKDYGJLZKin",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "Umbrella OrgID",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs": {
+      "unique_name": "variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "ThousandEyes Bearer Token",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01LR9ZI6TXDMM3YHhi6majjQZIMTkMEdVSc",
+        "name": "Umbrella Get Token",
+        "title": "Umbrella Get Token",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "access_token",
+              "type": "datatype.string",
+              "is_required": false,
+              "is_invisible": false
+            },
+            "unique_name": "variable_workflow_01LRAM9TO74C27D0m20poxXhnFMiVWPwTWs",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Umbrella Get Token",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "web-service.endpoint",
+            "target_id": "definition_target_01LRAJ2SGON1B7lgaPTWYqGbjXzTHM571I0",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01LRA5PFM23E65ZjlXtl6UNAWVUdlWd9b7S",
+            "name": "HTTP Request",
+            "title": "HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "display_name": "HTTP Request",
+              "method": "GET",
+              "relative_url": "/auth/v2/oauth2/token",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01LRAKCAN5CKY0JSH5NiCC2DyLO0ne8yirB",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "description": "{\n  \"token_type\": \"bearer\",\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTExNzY1MjgsImlhdCI6MTYxMTE3MjkyOCwiaXNzIjoidW1icmVsbGEtYXV0aHovYXV0aHN2YyIsIm5iZiI6MTYxMTE3MjkyOCwic3ViIjoib3JnLzE5OTM0MDEvdXNlci84MDkxNzE1Iiwic2NvcGUiOiJyb2xlOnJvb3QtYWRtaW4iLCJhdXRoel9kb25lIjpmYWxzZX0.rjLVuTkiAvL-WgZlY3oLpZ_bm8M6GdSCkCAW0E53bk6_RZ4E3F378VJRxbyp8p7bEGc0kzrAsy8xWkX0U8PDGCU1z03JIlEMFuPDu485-zL-w9-GiaUXWumHkdAT7xfaUjFlOaqDEJm0KBu7BMKtT1rDzc3ltRDTNJzocMq2cyKg9xBArNgFRJah9vUPU2oZo8epq7yD0smAntpeQ3Zy9r_oeqsJ7CO3_nNhYTPmFlmONzZFZXoijSdko564EhgHbT6CRhTarzTpu2-X9FMX_dffWV0jL2wASyTDmApmwZggrOPVhHonSCX8PeV-6XvzXYNhqGnzeGvlTpelGWWGDw\",\n  \"expires_in\": 3600\n}",
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01LRA5PFM23E65ZjlXtl6UNAWVUdlWd9b7S.output.response_body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$..access_token",
+                  "jsonpath_query_name": "access_token",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01LRAMCI185PV3euNmofO35NZN6JlZgIhKI",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01LR9ZI6TXDMM3YHhi6majjQZIMTkMEdVSc.output.variable_workflow_01LRAM9TO74C27D0m20poxXhnFMiVWPwTWs$",
+                  "variable_value_new": "$activity.definition_activity_01LRAKCAN5CKY0JSH5NiCC2DyLO0ne8yirB.output.jsonpath_queries.access_token$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01M3TXZFN47LJ36IpRFte4JHAXZUMQhEeRw",
+        "name": "ThousandEyes - Create Test",
+        "title": "ThousandEyes - Create Test",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Domain",
+              "type": "datatype.string",
+              "is_required": false,
+              "is_invisible": false
+            },
+            "unique_name": "variable_workflow_01M3U0D1T4JOE44aV8a0LsMD4dF1HNYd899",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "ThousandEyes - Create Test",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "web-service.endpoint",
+            "target_id": "definition_target_01M3TZLZKKICV0iEyxfqVyFDR6ZfqpPTs0V",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01M3U0N74449O1xQ8InVYPFggVUgwoLZTC4",
+            "name": "HTTP Request",
+            "title": "get all Test from TE",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $global.variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs.global.variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs$"
+                }
+              ],
+              "display_name": "get all Test from TE",
+              "method": "GET",
+              "relative_url": "/v6/tests.json",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01M3UP1TGS8IX5KXCjocxnUjZRGGD23d0fv",
+            "name": "HTTP Request",
+            "title": "get specific Test from TE",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $global.variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs.global.variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs$"
+                }
+              ],
+              "display_name": "get specific Test from TE",
+              "method": "GET",
+              "relative_url": "/v6/tests/1882283.json",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": true,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01M3UB3UWXOX42mR4lrq8OIBy8Y9qnoZqCQ",
+            "name": "HTTP Request",
+            "title": "add Page-Load Test to TE",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "body": "{\n  \"enabled\": 1,\n  \"interval\": 300,\n  \"httpInterval\": 300,\n  \"agents\": [\n    {\n      \"agentId\": 4113\n    }\n  ],\n  \"testName\": \"Page-Load for $workflow.definition_workflow_01M3TXZFN47LJ36IpRFte4JHAXZUMQhEeRw.input.variable_workflow_01M3U0D1T4JOE44aV8a0LsMD4dF1HNYd899$\",\n  \"url\": \"https://$workflow.definition_workflow_01M3TXZFN47LJ36IpRFte4JHAXZUMQhEeRw.input.variable_workflow_01M3U0D1T4JOE44aV8a0LsMD4dF1HNYd899$\",\n  \"description\": \"This test was added via an API call from SecureX Orchestration\",\n  \"protocol\": \"TCP\",  \n  \"alertsEnabled\": 1\n}",
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $global.variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs.global.variable_01M3TZ7W0LMHC1eH9GsZMKdpfv8nOFVgNCs$"
+                }
+              ],
+              "display_name": "add Page-Load Test to TE",
+              "method": "POST",
+              "relative_url": "/v6/tests/page-load/new.json",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    }
+  ]
+}
