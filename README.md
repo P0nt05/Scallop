@@ -32,6 +32,10 @@ The Top 10 list is the source for the creation of the HTTP Load-page tests in or
 All tests are created via an API request with default Test metadata, like Intervall, Alert, ...
 ![TE HTTP page-load](https://gblobscdn.gitbook.com/assets%2F-M4QARF6s57qxMrOHDTZ%2Fsync%2Fc3d13233b3338ad0f75ba262e74a5a44c103ed93.png?alt=media)
 
+# SecureX Orchestration workflow - Overview
+
+Here a short overview of the SXO workflow:
+![SXO workflows](https://github.com/P0nt05/Scallop/blob/main/IMAGES/workflow.gif)
 
 # Installation
 ## Detailed installation instructions can be found [HERE](https://github.com/P0nt05/Scallop/blob/main/INSTALL.md)
